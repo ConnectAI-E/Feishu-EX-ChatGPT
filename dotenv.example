@@ -1,0 +1,10 @@
+# 飞书配置
+FEISHU_APP_ID = ""
+FEISHU_APP_SECRET = ""
+VERIFY_TOKEN = ""
+ENCRYPT_KEY = ""
+BOT_NAME = ""
+
+# 服务配置
+# HTTP 监听端口
+HTTP_PORT = ":8080"
