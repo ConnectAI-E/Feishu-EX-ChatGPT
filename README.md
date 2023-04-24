@@ -47,3 +47,9 @@ cp dotenv.example .env
 
 go run ./cmd/main.go
 ```
+
+
+## 如何贡献
+
+1. 代码结构参考「整洁架构思想」，具体说明参考 [github.com/xpzouying/go-clean-arch](https://github.com/xpzouying/go-clean-arch)。
+2. 编码规范参考 [Go Code Review](https://github.com/golang/go/wiki/CodeReviewComments)
