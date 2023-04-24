@@ -5,6 +5,9 @@ VERIFY_TOKEN = ""
 ENCRYPT_KEY = ""
 BOT_NAME = ""
 
+# OpenAI
+OPENAI_TOKEN = ""
+
 # 服务配置
 # HTTP 监听端口
 HTTP_PORT = ":8080"

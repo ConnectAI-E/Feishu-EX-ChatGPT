@@ -4,9 +4,11 @@ import (
 	"os"
 
 	"github.com/ConnectAI-E/Feishu-EX-ChatGPT/internal/domain"
+	"github.com/ConnectAI-E/Feishu-EX-ChatGPT/internal/repo/chatgpt"
 	"github.com/ConnectAI-E/Feishu-EX-ChatGPT/internal/repo/feishu"
 	"github.com/ConnectAI-E/Feishu-EX-ChatGPT/internal/server"
 	"github.com/ConnectAI-E/Feishu-EX-ChatGPT/internal/service"
+	"github.com/sashabaranov/go-openai"
 
 	"github.com/joho/godotenv"
 	sdkginext "github.com/larksuite/oapi-sdk-gin"
@@ -29,17 +31,29 @@ func main() {
 		feishuVerifyToken = os.Getenv("VERIFY_TOKEN")
 		feishuEncryptKey  = os.Getenv("ENCRYPT_KEY")
 
+		openAIToken = os.Getenv("OPENAI_TOKEN")
+
 		port = os.Getenv("HTTP_PORT")
 	)
 
-	feishuClient := lark.NewClient(feishuAppID, feishuAppSecret)
-	feishuer := feishu.NewFeishu(feishuClient)
+	var feishuer domain.Feishuer
+	{ // feishu client
+		feishuClient := lark.NewClient(feishuAppID, feishuAppSecret)
+		feishuer = feishu.NewFeishu(feishuClient)
+	}
 
-	feishuEx, err := domain.New(
+	var llm domain.LLMer
+	{ // llm client
+		openaiClient := openai.NewClient(openAIToken)
+		llm = chatgpt.NewChatGPT(openaiClient)
+	}
+
+	feishuEx, err := domain.NewFeishuEx(
 		feishuer,
+
 		domain.WithActions(
 			domain.NewProcessMentionAction(botname),
-			domain.NewMessageAction(),
+			domain.NewMessageAction(llm),
 		),
 	)
 	if err != nil {
