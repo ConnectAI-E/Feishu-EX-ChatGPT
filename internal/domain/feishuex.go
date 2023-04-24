@@ -28,7 +28,7 @@ func WithActions(actions ...Action) FeishuExOption {
 	}
 }
 
-func New(feishuer Feishuer, opts ...FeishuExOption) (*FeishuEx, error) {
+func NewFeishuEx(feishuer Feishuer, opts ...FeishuExOption) (*FeishuEx, error) {
 	feishuEx := &FeishuEx{
 		feishuer: feishuer,
 		actions:  make([]Action, 0, 8),

@@ -50,27 +50,43 @@ func (a ProcessMentionAction) Execute(ctx context.Context, actionInfo *ActionInf
 
 var _ Action = &MessageAction{}
 
-type MessageAction struct{}
+type MessageAction struct {
+	llmer LLMer
+}
 
-func NewMessageAction() *MessageAction {
-	return &MessageAction{}
+func NewMessageAction(llmer LLMer) *MessageAction {
+	return &MessageAction{llmer: llmer}
 }
 
 func (a MessageAction) Execute(ctx context.Context, actionInfo *ActionInfo) (next bool, err error) {
 
 	msg := actionInfo.Message.GetText()
+	msgID := actionInfo.Message.ID()
 
 	if len(msg) == 0 {
 		return false, nil
 	}
 
-	var (
-		msgID     = actionInfo.Message.ID()
-		replyText = "Got: " + msg
-	)
+	messages := a.makeLlmMessages(actionInfo)
+	answer, err := a.llmer.Chat(ctx, messages)
+	if err != nil {
+		return false, err
+	}
 
-	replyMsg := MakeSimpleReply(msgID, replyText)
+	replyMsg := MakeSimpleReply(msgID, answer.Content)
 
 	actionInfo.ReplyMsg = replyMsg
 	return true, nil
+}
+
+func (a MessageAction) makeLlmMessages(actionInfo *ActionInfo) []LlmMessage {
+	msg := actionInfo.Message.GetText()
+
+	return []LlmMessage{
+		{
+			Role:    "user",
+			Content: msg,
+		},
+	}
+
 }
