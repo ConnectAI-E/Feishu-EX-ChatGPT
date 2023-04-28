@@ -10,6 +10,8 @@ Feishu-EX-ChatGPT 是让飞书接入一个拥有增强版本的 ChatGPT 功能�
 2. 插件可以进行随意扩展，并通过注册机制完成插件的注册与激活。
 3. 利用插件机制，实现对第三方服务的扩展能力。
 
+一起贡献更多插件能力，增强 FeishuEx 扩展能力。[github.com/agi-cn/llmplugin](https://github.com/agi-cn/llmplugin)
+
 ## 工作流程 🌊
 
 ![how_it_works](./images/how_it_works.png)
