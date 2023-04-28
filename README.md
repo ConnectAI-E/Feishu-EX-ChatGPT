@@ -40,7 +40,15 @@ Feishu-EX-ChatGPT 是让飞书接入一个拥有增强版本的 ChatGPT 功能�
 1. 设置系统环境变量
 2. 加载 .env 环境变量定义文件
 
-申请 Google 插件的方式: [https://stackoverflow.com/questions/37083058/programmatically-searching-google-in-python-using-custom-search](https://stackoverflow.com/questions/37083058/programmatically-searching-google-in-python-using-custom-search)
+<detail>
+    <summary>申请 Google 搜索接口</summary>
+
+1. 获取 [GOOGLE_ENGINE_ID](http://www.google.com/cse/)
+2. 获取 [GOOGLE_TOKEN](https://console.cloud.google.com/apis/credentials?pli=1&project=bobmac-344202)
+
+[主要参考](https://stackoverflw.com/questions/37083058/programmatically-searching-google-in-python-using-custom-search)
+
+</detail>
 
 
 ### 1. 本地运行
