@@ -11,3 +11,10 @@ OPENAI_TOKEN = ""
 # 服务配置
 # HTTP 监听端口
 HTTP_PORT = ":8080"
+
+
+# --- FOR Plugins ---
+
+## Google Search
+GOOGLE_ENGINE_ID = ""
+GOOGLE_TOKEN = ""
