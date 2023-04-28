@@ -13,12 +13,23 @@ import (
 func newLLMPluginManager() *llmplugin.PluginManager {
 	var (
 		openAIToken = os.Getenv("OPENAI_TOKEN")
-
-		googleEngineID = os.Getenv("GOOGLE_ENGINE_ID")
-		googleToken    = os.Getenv("GOOGLE_TOKEN")
 	)
 
 	chatgpt := openai.NewChatGPT(openAIToken)
+
+	plugins := makePlugins()
+
+	return llmplugin.NewPluginManager(
+		chatgpt,
+		llmplugin.WithPlugins(plugins),
+	)
+}
+
+func makePlugins() []llmplugin.Plugin {
+	var (
+		googleEngineID = os.Getenv("GOOGLE_ENGINE_ID")
+		googleToken    = os.Getenv("GOOGLE_TOKEN")
+	)
 
 	plugins := []llmplugin.Plugin{
 		&llmplugin.SimplePlugin{
@@ -26,18 +37,18 @@ func newLLMPluginManager() *llmplugin.PluginManager {
 			InputExample: ``,
 			Desc:         "Can check the weather forecast",
 			DoFunc: func(ctx context.Context, query string) (answer string, err error) {
-				answer = "Call Weather Plugin"
+				answer = "Here is dummy weather plugin"
 				return
 			},
 		},
 
-		google.NewGoogle(googleEngineID, googleToken),
-
 		calculator.NewCalculator(),
 	}
 
-	return llmplugin.NewPluginManager(
-		chatgpt,
-		llmplugin.WithPlugins(plugins),
-	)
+	if googleEngineID != "" && googleToken != "" {
+		plugins = append(plugins,
+			google.NewGoogle(googleEngineID, googleToken))
+	}
+
+	return plugins
 }
