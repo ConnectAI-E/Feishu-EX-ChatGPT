@@ -56,9 +56,9 @@ Feishu-EX-ChatGPT 是让飞书接入一个拥有增强版本的 ChatGPT 功能�
 使用 .env 环境变量文件，
 
 ```bash
-cp dotenv.example ./cmd/.env
+cp dotenv.example .env
 
-go run ./cmd/main.go
+go run ./cmd
 ```
 
 ### 2. 飞书提问
