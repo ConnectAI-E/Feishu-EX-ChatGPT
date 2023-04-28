@@ -33,23 +33,45 @@ Feishu-EX-ChatGPT 是让飞书接入一个拥有增强版本的 ChatGPT 功能�
 
 ## 运行
 
+以 Google Search 插件为例，
+
 提示：运行前需要配置对应的环境变量，支持两种方式：
 
 1. 设置系统环境变量
 2. 加载 .env 环境变量定义文件
+
+申请 Google 插件的方式: [https://stackoverflow.com/questions/37083058/programmatically-searching-google-in-python-using-custom-search](https://stackoverflow.com/questions/37083058/programmatically-searching-google-in-python-using-custom-search)
+
 
 ### 1. 本地运行
 
 使用 .env 环境变量文件，
 
 ```bash
-cp dotenv.example .env
+cp dotenv.example ./cmd/.env
 
 go run ./cmd/main.go
 ```
+
+### 2. 飞书提问
+
+1. 没有支持 Plugin 时，效果如下，
+
+  ![](./images/answer_by_chatgpt.jpg)
+
+2. 支持 Plugin 时，效果，
+
+  ![](./images/answer_by_plugin.png)
 
 
 ## 如何贡献
 
 1. 代码结构参考「整洁架构思想」，具体说明参考 [github.com/xpzouying/go-clean-arch](https://github.com/xpzouying/go-clean-arch)。
 2. 编码规范参考 [Go Code Review](https://github.com/golang/go/wiki/CodeReviewComments)
+
+
+## 联系
+
+欢迎飞书讨论更多功能扩展，
+
+![author_wx](./images/author_wx.jpeg)
