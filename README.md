@@ -48,7 +48,7 @@ Feishu-EX-ChatGPT 是让飞书接入一个拥有增强版本的 ChatGPT 功能�
 1. 获取 [GOOGLE_ENGINE_ID](http://www.google.com/cse/)
 2. 获取 [GOOGLE_TOKEN](https://console.cloud.google.com/apis/credentials?pli=1&project=bobmac-344202)
 
-[主要参考](https://stackoverflw.com/questions/37083058/programmatically-searching-google-in-python-using-custom-search)
+[主要参考](https://stackoverflow.com/questions/37083058/programmatically-searching-google-in-python-using-custom-search)
 
 </details>
 
