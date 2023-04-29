@@ -19,7 +19,7 @@ import (
 )
 
 func main() {
-	logrus.SetReportCaller(true)
+	logrus.SetLevel(logrus.DebugLevel)
 
 	if err := godotenv.Load(); err != nil {
 		logrus.Fatalf("load env failed: %v", err)

@@ -8,6 +8,7 @@ import (
 	"github.com/agi-cn/llmplugin/llm/openai"
 	"github.com/agi-cn/llmplugin/plugins/calculator"
 	"github.com/agi-cn/llmplugin/plugins/google"
+	"github.com/sirupsen/logrus"
 )
 
 func newLLMPluginManager() *llmplugin.PluginManager {
@@ -18,6 +19,8 @@ func newLLMPluginManager() *llmplugin.PluginManager {
 	chatgpt := openai.NewChatGPT(openAIToken)
 
 	plugins := makePlugins()
+
+	loggingPlugin(plugins)
 
 	return llmplugin.NewPluginManager(
 		chatgpt,
@@ -51,4 +54,10 @@ func makePlugins() []llmplugin.Plugin {
 	}
 
 	return plugins
+}
+
+func loggingPlugin(plugins []llmplugin.Plugin) {
+	for _, p := range plugins {
+		logrus.Infof("load plugin: %v", p.GetName())
+	}
 }
