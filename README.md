@@ -112,9 +112,10 @@ go run ./cmd
   * flyctl secrets set BOT_NAME=feishu-bot
   * flyctl secrets set OPENAI_TOKEN=sk-xxx
 
-6. 编译二进制文件：`go build -o feishuex-bot ./cmd/`
+6. 部署程序：`flyctl deploy`。
 
-7.
+  ![](./images/fly_deploy.png)
+
 
 
 </details>
