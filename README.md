@@ -123,15 +123,21 @@ go run ./cmd
   * flyctl secrets set ENCRYPT_KEY=abcABCxxx
   * flyctl secrets set BOT_NAME=feishu-bot
   * flyctl secrets set OPENAI_TOKEN=sk-xxx
-
+  
   配置后，使用 `flyctl secrets list` 查看环境变量设置。
-
   ![](./images/fly_env_list.jpg)
 
 6. 部署程序：`flyctl deploy`。
-
   ![](./images/fly_deploy.png)
 
+
+7. 查看状态：
+
+  * 通过命令行查看：`flyctl status`
+    ![](./images/fly_status.png)
+
+  * 通过页面查看 [https://fly.io/dashboard/personal](https://fly.io/dashboard/personal)
+    ![](./images/fly_dashboard.png)
 
 </details>
 
