@@ -80,6 +80,51 @@ go run ./cmd
 2. 编码规范参考 [Go Code Review](https://github.com/golang/go/wiki/CodeReviewComments)
 
 
+## 部署机器人
+
+### 1. 部署飞书机器人服务
+
+因为飞书需要访问公网的 IP 地址，所以我们使用 [fly.io](https://fly.io/) 进行部署。一般情况下，免费额度都够用。
+
+<details>
+    <summary>fly.io 部署流程</summary>
+
+以 MacOS 为例，其他的类似。
+
+1. 登录 [https://fly.io/dashboard](https://fly.io/dashboard) 并注册账号。
+
+2. 安装 [Fly CLI](https://fly.io/docs/getting-started/installing-flyctl/)。
+
+3. 运行命令登录，`flyctl auth login`。
+
+  ```bash
+  Waiting for session... Done
+  successfully logged in as xpzouying@gmail.com
+  ```
+
+4. 运行 `flyctl apps create`，输入 app name： `feishuex-bot`。
+
+5. 使用 flyctl env 配置各种环境变量。
+  * flyctl secrets set FEISHU_APP_ID=cli_xxx
+  * flyctl secrets set FEISHU_APP_SECRET=abcABCxxx
+  * flyctl secrets set VERIFY_TOKEN=abcABCxxx
+  * flyctl secrets set ENCRYPT_KEY=abcABCxxx
+  * flyctl secrets set BOT_NAME=feishu-bot
+  * flyctl secrets set OPENAI_TOKEN=sk-xxx
+
+6. 编译二进制文件：`go build -o feishuex-bot ./cmd/`
+
+7.
+
+
+</details>
+
+
+
+### 2. 配置飞书机器人
+
+
+
 ## 联系
 
 欢迎飞书讨论更多功能扩展，

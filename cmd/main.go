@@ -37,6 +37,10 @@ func main() {
 		port = os.Getenv("HTTP_PORT")
 	)
 
+	if port == "" {
+		port = ":8080"
+	}
+
 	var feishuer domain.Feishuer
 	{ // feishu client
 		feishuClient := lark.NewClient(feishuAppID, feishuAppSecret)
