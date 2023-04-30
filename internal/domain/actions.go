@@ -213,6 +213,20 @@ func (a PluginAction) getOnelineForGoogleSearch(result string) string {
 	)
 }
 
+// NOTE(zy): larkim sdk 底层实现太二了，对于所有的特殊字符都处理不了，需要特殊转义一下。
 func (a PluginAction) getOnelineForAgiCnSearch(result string) string {
-	return strings.ReplaceAll(result, "\n", ".")
+
+	replaceSpecialChars := []struct {
+		before string
+		after  string
+	}{
+		{before: "\n", after: "\\n"},
+		{before: `"`, after: `'`},
+	}
+
+	for _, replace := range replaceSpecialChars {
+		result = strings.ReplaceAll(result, replace.before, replace.after)
+	}
+
+	return result
 }
