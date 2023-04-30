@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/agi-cn/llmplugin"
+	"github.com/agi-cn/llmplugin/plugins/agicn_search"
 	"github.com/agi-cn/llmplugin/plugins/google"
 	"github.com/patrickmn/go-cache"
 	"github.com/sirupsen/logrus"
@@ -183,6 +184,11 @@ func (a PluginAction) makeReplyMessage(ctx context.Context, pluginCtxs []llmplug
 			result = a.getOnelineForGoogleSearch(result)
 		}
 
+		// NOTE(zy): handle search result for feishu message
+		if pluginCtx.GetName() == (agicn_search.AgicnSearch{}).GetName() {
+			result = a.getOnelineForAgiCnSearch(result)
+		}
+
 		results = append(results, result)
 	}
 
@@ -205,4 +211,22 @@ func (a PluginAction) getOnelineForGoogleSearch(result string) string {
 	return strings.TrimSpace(
 		strings.Replace(final, "<1>", "", 1),
 	)
+}
+
+// NOTE(zy): larkim sdk 底层实现太二了，对于所有的特殊字符都处理不了，需要特殊转义一下。
+func (a PluginAction) getOnelineForAgiCnSearch(result string) string {
+
+	replaceSpecialChars := []struct {
+		before string
+		after  string
+	}{
+		{before: "\n", after: "\\n"},
+		{before: `"`, after: `'`},
+	}
+
+	for _, replace := range replaceSpecialChars {
+		result = strings.ReplaceAll(result, replace.before, replace.after)
+	}
+
+	return result
 }

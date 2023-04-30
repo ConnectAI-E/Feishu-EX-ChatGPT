@@ -3,7 +3,7 @@ module github.com/ConnectAI-E/Feishu-EX-ChatGPT
 go 1.20
 
 require (
-	github.com/agi-cn/llmplugin v0.1.1-0.20230428035047-4babd57c11a0
+	github.com/agi-cn/llmplugin v0.2.0
 	github.com/gin-gonic/gin v1.9.0
 	github.com/google/uuid v1.3.0
 	github.com/joho/godotenv v1.5.1
