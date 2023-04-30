@@ -35,22 +35,14 @@ Feishu-EX-ChatGPT 是让飞书接入一个拥有增强版本的 ChatGPT 功能�
 
 ## 运行
 
-以 Google Search 插件为例，
+支持本地运行，或者使用 fly.io 进行部署。
 
-提示：运行前需要配置对应的环境变量，支持两种方式：
+运行时，依赖环境变量支持，环境变量加载形式有：
 
 1. 设置系统环境变量
 2. 加载 .env 环境变量定义文件
 
-<details>
-    <summary>申请 Google 搜索接口</summary>
-
-1. 获取 [GOOGLE_ENGINE_ID](http://www.google.com/cse/)
-2. 获取 [GOOGLE_TOKEN](https://console.cloud.google.com/apis/credentials?pli=1&project=bobmac-344202)
-
-[主要参考](https://stackoverflow.com/questions/37083058/programmatically-searching-google-in-python-using-custom-search)
-
-</details>
+具体环境变量参考：`./dotenv.example` 文件说明。
 
 
 ### 1. 本地运行
@@ -62,6 +54,26 @@ cp dotenv.example .env
 
 go run ./cmd
 ```
+
+### 2. 搜索插件支持
+
+支持搜索引擎如下，
+
+1. agi.cn search 搜索插件 - 封装了 duckduckgo 搜索能力，且不需要额外申请 token，默认集成。
+2. 支持 Google Search 插件能力（需要申请 Google Search Engine Token）。
+
+<details>
+    <summary>申请 Google 搜索接口</summary>
+
+1. 获取 [GOOGLE_ENGINE_ID](http://www.google.com/cse/)
+2. 获取 [GOOGLE_TOKEN](https://console.cloud.google.com/apis/credentials?pli=1&project=bobmac-344202)
+
+[主要参考](https://stackoverflow.com/questions/37083058/programmatically-searching-google-in-python-using-custom-search)
+
+</details>
+
+没有配置 Google Search 的环境变量，则默认启动 duckduckgo 搜索。
+
 
 ### 2. 飞书提问
 
@@ -78,6 +90,64 @@ go run ./cmd
 
 1. 代码结构参考「整洁架构思想」，具体说明参考 [github.com/xpzouying/go-clean-arch](https://github.com/xpzouying/go-clean-arch)。
 2. 编码规范参考 [Go Code Review](https://github.com/golang/go/wiki/CodeReviewComments)
+
+
+## 部署机器人
+
+### 1. 部署飞书机器人服务
+
+因为飞书需要访问公网的 IP 地址，所以我们使用 [fly.io](https://fly.io/) 进行部署。一般情况下，免费额度都够用。
+
+<details>
+    <summary>fly.io 部署流程</summary>
+
+以 MacOS 为例，其他的类似。
+
+1. 登录 [https://fly.io/dashboard](https://fly.io/dashboard) 并注册账号。
+
+2. 安装 [Fly CLI](https://fly.io/docs/getting-started/installing-flyctl/)。
+
+3. 运行命令登录，`flyctl auth login`。
+
+  ```bash
+  Waiting for session... Done
+  successfully logged in as xpzouying@gmail.com
+  ```
+
+4. 运行 `flyctl apps create`，输入 app name： `feishuex-bot`。
+
+5. 使用 flyctl env 配置各种环境变量。
+  * flyctl secrets set FEISHU_APP_ID=cli_xxx
+  * flyctl secrets set FEISHU_APP_SECRET=abcABCxxx
+  * flyctl secrets set VERIFY_TOKEN=abcABCxxx
+  * flyctl secrets set ENCRYPT_KEY=abcABCxxx
+  * flyctl secrets set BOT_NAME=feishu-bot
+  * flyctl secrets set OPENAI_TOKEN=sk-xxx
+  
+  配置后，使用 `flyctl secrets list` 查看环境变量设置。
+  ![](./images/fly_env_list.jpg)
+
+6. 部署程序：`flyctl deploy`。
+  ![](./images/fly_deploy.png)
+
+
+7. 查看状态：
+
+  * 通过命令行查看：`flyctl status`
+    ![](./images/fly_status.png)
+
+  * 通过页面查看 [https://fly.io/dashboard/personal](https://fly.io/dashboard/personal)
+    ![](./images/fly_dashboard.png)
+
+</details>
+
+
+
+### 2. 配置飞书机器人
+
+使用 fly.io 成功部署后，可以在飞书开发平台配置请求地址。
+
+![](./images/feishu_bot_config.png)
 
 
 ## 联系

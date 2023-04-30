@@ -22,7 +22,7 @@ func main() {
 	logrus.SetLevel(logrus.DebugLevel)
 
 	if err := godotenv.Load(); err != nil {
-		logrus.Fatalf("load env failed: %v", err)
+		logrus.Warnf("load env failed: %v", err)
 	}
 
 	var (
@@ -36,6 +36,10 @@ func main() {
 
 		port = os.Getenv("HTTP_PORT")
 	)
+
+	if port == "" {
+		port = ":8080"
+	}
 
 	var feishuer domain.Feishuer
 	{ // feishu client
