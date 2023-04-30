@@ -6,6 +6,7 @@ import (
 
 	"github.com/agi-cn/llmplugin"
 	"github.com/agi-cn/llmplugin/llm/openai"
+	"github.com/agi-cn/llmplugin/plugins/agicn_search"
 	"github.com/agi-cn/llmplugin/plugins/calculator"
 	"github.com/agi-cn/llmplugin/plugins/google"
 	"github.com/sirupsen/logrus"
@@ -29,10 +30,6 @@ func newLLMPluginManager() *llmplugin.PluginManager {
 }
 
 func makePlugins() []llmplugin.Plugin {
-	var (
-		googleEngineID = os.Getenv("GOOGLE_ENGINE_ID")
-		googleToken    = os.Getenv("GOOGLE_TOKEN")
-	)
 
 	plugins := []llmplugin.Plugin{
 		&llmplugin.SimplePlugin{
@@ -48,9 +45,20 @@ func makePlugins() []llmplugin.Plugin {
 		calculator.NewCalculator(),
 	}
 
-	if googleEngineID != "" && googleToken != "" {
-		plugins = append(plugins,
-			google.NewGoogle(googleEngineID, googleToken))
+	{ // Google Search Engine
+		var (
+			googleEngineID = os.Getenv("GOOGLE_ENGINE_ID")
+			googleToken    = os.Getenv("GOOGLE_TOKEN")
+		)
+
+		if googleEngineID != "" && googleToken != "" {
+			plugins = append(plugins,
+				google.NewGoogle(googleEngineID, googleToken))
+		}
+	}
+
+	{ // Customize Search Engine: agi.cn search
+		plugins = append(plugins, agicn_search.NewAgicnSearch())
 	}
 
 	return plugins
