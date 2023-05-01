@@ -66,6 +66,7 @@ go run ./cmd
     <summary>申请 Google 搜索接口</summary>
 
 1. 获取 [GOOGLE_ENGINE_ID](http://www.google.com/cse/)
+2. 开通 [GOOGLE_SEARCH_API](https://console.cloud.google.com/apis/api/customsearch.googleapis.com/metrics)
 2. 获取 [GOOGLE_TOKEN](https://console.cloud.google.com/apis/credentials?pli=1&project=bobmac-344202)
 
 [主要参考](https://stackoverflow.com/questions/37083058/programmatically-searching-google-in-python-using-custom-search)
