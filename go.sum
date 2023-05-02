@@ -7,10 +7,6 @@ cloud.google.com/go/compute/metadata v0.2.3 h1:mg4jlk7mCAj6xXp9UJ4fjI9VUI5rubuGB
 cloud.google.com/go/compute/metadata v0.2.3/go.mod h1:VAV5nSsACxMJvgaAuX6Pk2AawlZn8kiOGuCv6gTkwuA=
 cloud.google.com/go/longrunning v0.4.1 h1:v+yFJOfKC3yZdY6ZUI933pIYdhyhV8S3NpWrXWmg7jM=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
-github.com/agi-cn/llmplugin v0.1.0 h1:IbzdFIpQFs4MqSnu5f4KrU1uVMXjOx2Gay7GzbUJU8U=
-github.com/agi-cn/llmplugin v0.1.0/go.mod h1:nGX6mCiCnTuhH/ymMZbteHuAf2qLx5+0076BCUv+4iI=
-github.com/agi-cn/llmplugin v0.1.1-0.20230428035047-4babd57c11a0 h1:n4J3WNezj6etd4xNAn1fjCTU9xvt76FOmz76Lil9VXk=
-github.com/agi-cn/llmplugin v0.1.1-0.20230428035047-4babd57c11a0/go.mod h1:nGX6mCiCnTuhH/ymMZbteHuAf2qLx5+0076BCUv+4iI=
 github.com/agi-cn/llmplugin v0.2.0 h1:1I4jHzHVAZITYv5BYlOYGjj1ku283zpXAgyZfcPvFlI=
 github.com/agi-cn/llmplugin v0.2.0/go.mod h1:nGX6mCiCnTuhH/ymMZbteHuAf2qLx5+0076BCUv+4iI=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
