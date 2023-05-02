@@ -91,6 +91,7 @@ func (f *FeishuEx) processActionInfo(ctx context.Context, actionInfo *ActionInfo
 }
 
 func (f *FeishuEx) sendReplyMessage(ctx context.Context, replyMessage *ReplyMessage) error {
+	// NOTE(zy): 这里有可能是没有结果，也有可能是重复消息处理。
 	if replyMessage == nil {
 		logrus.Warnf("sendReplyMessage: reply failed, nil reply message")
 		return nil

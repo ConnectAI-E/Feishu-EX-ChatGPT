@@ -5,9 +5,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/ConnectAI-E/Feishu-EX-ChatGPT/pkg/escape"
+
 	"github.com/agi-cn/llmplugin"
-	"github.com/agi-cn/llmplugin/plugins/agicn_search"
-	"github.com/agi-cn/llmplugin/plugins/google"
 	"github.com/patrickmn/go-cache"
 	"github.com/sirupsen/logrus"
 )
@@ -99,33 +99,38 @@ func NewMessageAction(llmer LLMer) *MessageAction {
 }
 
 func (a MessageAction) Execute(ctx context.Context, actionInfo *ActionInfo) (next bool, err error) {
+	if actionInfo.ExistsReplyMsg() {
+		return true, nil
+	}
 
-	msg := actionInfo.Message.GetText()
+	msg := actionInfo.GetContext()
 	msgID := actionInfo.Message.ID()
 
 	if len(msg) == 0 {
 		return false, nil
 	}
 
-	messages := a.makeLlmMessages(actionInfo)
+	messages := a.makeLlmMessages(msg)
 	answer, err := a.llmer.Chat(ctx, messages)
 	if err != nil {
+		logrus.Errorf("MessageAction: llmer chat error: %v", err)
 		return false, err
 	}
 
-	replyMsg := MakeSimpleReply(msgID, answer.Content)
+	logrus.Debugf("MessageAction: llmer.Chat: message=%s answer: %s", msg, answer.Content)
+
+	result := escape.String(answer.Content)
+	replyMsg := MakeSimpleReply(msgID, result)
 
 	actionInfo.ReplyMsg = replyMsg
 	return true, nil
 }
 
-func (a MessageAction) makeLlmMessages(actionInfo *ActionInfo) []LlmMessage {
-	msg := actionInfo.Message.GetText()
-
+func (a MessageAction) makeLlmMessages(content string) []LlmMessage {
 	return []LlmMessage{
 		{
 			Role:    "user",
-			Content: msg,
+			Content: content,
 		},
 	}
 
@@ -179,54 +184,9 @@ func (a PluginAction) makeReplyMessage(ctx context.Context, pluginCtxs []llmplug
 			continue
 		}
 
-		// TODO(zy): Google Search result may reach the max limit of feishu message.
-		if pluginCtx.GetName() == (google.Google{}).GetName() {
-			result = a.getOnelineForGoogleSearch(result)
-		}
-
-		// NOTE(zy): handle search result for feishu message
-		if pluginCtx.GetName() == (agicn_search.AgicnSearch{}).GetName() {
-			result = a.getOnelineForAgiCnSearch(result)
-		}
-
+		result = escape.String(result)
 		results = append(results, result)
 	}
 
 	return strings.Join(results, "\n")
-}
-
-func (a PluginAction) getOnelineForGoogleSearch(result string) string {
-
-	if len(result) == 0 {
-		return ""
-	}
-
-	lines := strings.Split(result, "\n")
-	if len(lines) == 0 {
-		return ""
-	}
-
-	final := lines[0]
-
-	return strings.TrimSpace(
-		strings.Replace(final, "<1>", "", 1),
-	)
-}
-
-// NOTE(zy): larkim sdk 底层实现太二了，对于所有的特殊字符都处理不了，需要特殊转义一下。
-func (a PluginAction) getOnelineForAgiCnSearch(result string) string {
-
-	replaceSpecialChars := []struct {
-		before string
-		after  string
-	}{
-		{before: "\n", after: "\\n"},
-		{before: `"`, after: `'`},
-	}
-
-	for _, replace := range replaceSpecialChars {
-		result = strings.ReplaceAll(result, replace.before, replace.after)
-	}
-
-	return result
 }
