@@ -4,7 +4,6 @@ import (
 	"os"
 
 	"github.com/ConnectAI-E/Feishu-EX-ChatGPT/internal/domain"
-	"github.com/ConnectAI-E/Feishu-EX-ChatGPT/internal/repo/chatgpt"
 	"github.com/ConnectAI-E/Feishu-EX-ChatGPT/internal/repo/feishu"
 	"github.com/ConnectAI-E/Feishu-EX-ChatGPT/internal/server"
 	"github.com/ConnectAI-E/Feishu-EX-ChatGPT/internal/service"
@@ -14,7 +13,6 @@ import (
 	sdkginext "github.com/larksuite/oapi-sdk-gin"
 	lark "github.com/larksuite/oapi-sdk-go/v3"
 	"github.com/larksuite/oapi-sdk-go/v3/event/dispatcher"
-	"github.com/sashabaranov/go-openai"
 	"github.com/sirupsen/logrus"
 )
 
@@ -32,7 +30,6 @@ func main() {
 		feishuVerifyToken = os.Getenv("VERIFY_TOKEN")
 		feishuEncryptKey  = os.Getenv("ENCRYPT_KEY")
 
-		openAIToken = os.Getenv("OPENAI_TOKEN")
 
 		port = os.Getenv("HTTP_PORT")
 	)
@@ -49,8 +46,7 @@ func main() {
 
 	var llm domain.LLMer
 	{ // llm client
-		openaiClient := openai.NewClient(openAIToken)
-		llm = chatgpt.NewChatGPT(openaiClient)
+		llm = newLLM()
 	}
 
 	var llmManager *llmplugin.PluginManager

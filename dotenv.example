@@ -7,6 +7,8 @@ BOT_NAME = ""
 
 # OpenAI
 OPENAI_TOKEN = ""
+# openai 地址, 一般不需要修改, 除非你有自己的反向代理。默认为：https://api.openai.com/v1
+OPENAI_URL = ""
 
 # 服务配置
 # HTTP 监听端口
