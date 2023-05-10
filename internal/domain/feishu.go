@@ -3,5 +3,5 @@ package domain
 import "context"
 
 type Feishuer interface {
-	Reply(context.Context, ReplyMessage) error
+	Reply(ctx context.Context, actionResult *ActionResult) error
 }

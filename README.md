@@ -55,6 +55,10 @@ cp dotenv.example .env
 go run ./cmd
 ```
 
+### 2. 集成 Stable Diffusion 插件
+
+![](./images/feishu-ex-sd.jpg)
+
 ### 2. 搜索插件支持
 
 支持搜索引擎如下，
@@ -85,6 +89,7 @@ go run ./cmd
 2. 支持 Plugin 时，效果，
 
   ![](./images/answer_by_plugin.png)
+
 
 
 ## 如何贡献
@@ -124,7 +129,7 @@ go run ./cmd
   * flyctl secrets set ENCRYPT_KEY=abcABCxxx
   * flyctl secrets set BOT_NAME=feishu-bot
   * flyctl secrets set OPENAI_TOKEN=sk-xxx
-  
+
   配置后，使用 `flyctl secrets list` 查看环境变量设置。
   ![](./images/fly_env_list.jpg)
 

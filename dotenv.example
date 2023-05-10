@@ -20,3 +20,8 @@ HTTP_PORT = ":8080"
 ## Google Search
 GOOGLE_ENGINE_ID = ""
 GOOGLE_TOKEN = ""
+
+
+# Stable Diffusion
+# SD_ADDR = "127.0.0.1:19000"
+SD_ADDR = ""
