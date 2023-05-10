@@ -26,8 +26,10 @@ func (h HelperAction) Execute(ctx context.Context, actionInfo *ActionInfo) (next
 
 	msgID := actionInfo.GetMessageID()
 
-	replyMsg := MakeSendHelpCard(msgID)
-	actionInfo.ReplyMsg = replyMsg
+	actionInfo.Result = &ActionResult{
+		ReplyMsgID: msgID,
+		Type:       ActionResultHelpCard,
+	}
 
 	return false, nil
 }

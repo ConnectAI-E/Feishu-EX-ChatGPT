@@ -9,6 +9,7 @@ import (
 	"github.com/agi-cn/llmplugin/plugins/agicn_search"
 	"github.com/agi-cn/llmplugin/plugins/calculator"
 	"github.com/agi-cn/llmplugin/plugins/google"
+	"github.com/agi-cn/llmplugin/plugins/stablediffusion"
 	"github.com/sirupsen/logrus"
 )
 
@@ -59,6 +60,12 @@ func makePlugins() []llmplugin.Plugin {
 
 	{ // Customize Search Engine: agi.cn search
 		plugins = append(plugins, agicn_search.NewAgicnSearch())
+	}
+
+	{ // Stable Diffusion
+		if sdAddr := os.Getenv("SD_ADDR"); sdAddr != "" {
+			plugins = append(plugins, stablediffusion.NewStableDiffusion(sdAddr))
+		}
 	}
 
 	return plugins

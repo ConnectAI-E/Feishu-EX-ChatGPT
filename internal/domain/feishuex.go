@@ -61,7 +61,7 @@ func (f *FeishuEx) HandleMessageReceive(ctx context.Context, msg *LarkMessage) e
 		return err
 	}
 
-	return f.sendReplyMessage(ctx, actionInfo.ReplyMsg)
+	return f.sendReplyMessage(ctx, actionInfo.Result)
 }
 
 func (f *FeishuEx) makeActionInfo(msg *LarkMessage) *ActionInfo {
@@ -82,7 +82,7 @@ func (f *FeishuEx) processActionInfo(ctx context.Context, actionInfo *ActionInfo
 			return nil
 		}
 
-		if actionInfo.ExistsReplyMsg() {
+		if actionInfo.ExistsResult() {
 			return nil
 		}
 	}
@@ -90,12 +90,12 @@ func (f *FeishuEx) processActionInfo(ctx context.Context, actionInfo *ActionInfo
 	return nil
 }
 
-func (f *FeishuEx) sendReplyMessage(ctx context.Context, replyMessage *ReplyMessage) error {
+func (f *FeishuEx) sendReplyMessage(ctx context.Context, actionResult *ActionResult) error {
 	// NOTE(zy): 这里有可能是没有结果，也有可能是重复消息处理。
-	if replyMessage == nil {
+	if actionResult == nil {
 		logrus.Warnf("sendReplyMessage: reply failed, nil reply message")
 		return nil
 	}
 
-	return f.feishuer.Reply(ctx, *replyMessage)
+	return f.feishuer.Reply(ctx, actionResult)
 }

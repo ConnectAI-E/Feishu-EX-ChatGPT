@@ -1,4 +1,4 @@
-package domain
+package feishu
 
 import (
 	"encoding/json"
@@ -9,9 +9,9 @@ import (
 	larkim "github.com/larksuite/oapi-sdk-go/v3/service/im/v1"
 )
 
-type ReplyMessage larkim.ReplyMessageReq
+// type ReplyMessage larkim.ReplyMessageReq
 
-func MakeSimpleReply(replyMessageID string, message string) *ReplyMessage {
+func MakeSimpleReply(replyMessageID string, message string) *larkim.ReplyMessageReq {
 
 	content := larkim.NewTextMsgBuilder().
 		Text(message).Build()
@@ -25,10 +25,10 @@ func MakeSimpleReply(replyMessageID string, message string) *ReplyMessage {
 			Build()).
 		Build()
 
-	return (*ReplyMessage)(reply)
+	return reply
 }
 
-func MakeSendHelpCard(messageID string) *ReplyMessage {
+func MakeSendHelpCard(messageID string) *larkim.ReplyMessageReq {
 
 	newCardContent, _ := newSendCard(
 		withHeader("🎒需要帮助吗？", larkcard.TemplateBlue),
@@ -44,7 +44,7 @@ func MakeSendHelpCard(messageID string) *ReplyMessage {
 			Build()).
 		Build()
 
-	return (*ReplyMessage)(reply)
+	return reply
 }
 
 func newSendCard(header *larkcard.MessageCardHeader, elements ...larkcard.MessageCardElement) (string, error) {
