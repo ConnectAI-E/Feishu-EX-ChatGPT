@@ -30,7 +30,6 @@ func main() {
 		feishuVerifyToken = os.Getenv("VERIFY_TOKEN")
 		feishuEncryptKey  = os.Getenv("ENCRYPT_KEY")
 
-
 		port = os.Getenv("HTTP_PORT")
 	)
 
@@ -59,6 +58,7 @@ func main() {
 
 		domain.WithActions(
 			domain.NewProcessUniqueAction(),
+			domain.NewHelperAction(),
 			domain.NewProcessMentionAction(botname),
 
 			domain.NewPluginAction(llmManager),

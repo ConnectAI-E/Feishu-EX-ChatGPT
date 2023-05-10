@@ -29,7 +29,7 @@ func (a *ProcessUniqueAction) Execute(ctx context.Context, actionInfo *ActionInf
 	msgID := actionInfo.Message.ID()
 
 	if _, ok := a.processed.Get(msgID); ok {
-		logrus.Infof("message processed: %s", actionInfo.GetContext())
+		logrus.Infof("message processed: %s", actionInfo.GetText())
 		return false, nil
 	}
 
@@ -43,7 +43,11 @@ type ActionInfo struct {
 	ReplyMsg *ReplyMessage // 返回的消息。如果已经有了返回的消息，则不执行下一阶段。
 }
 
-func (a *ActionInfo) GetContext() string {
+func (a *ActionInfo) GetMessageID() string {
+	return *(a.Message.MessageId)
+}
+
+func (a *ActionInfo) GetText() string {
 	if msg := a.Message; msg != nil {
 
 		return msg.GetText()
@@ -103,7 +107,7 @@ func (a MessageAction) Execute(ctx context.Context, actionInfo *ActionInfo) (nex
 		return true, nil
 	}
 
-	msg := actionInfo.GetContext()
+	msg := actionInfo.GetText()
 	msgID := actionInfo.Message.ID()
 
 	if len(msg) == 0 {
