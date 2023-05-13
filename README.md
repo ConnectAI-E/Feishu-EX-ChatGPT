@@ -158,6 +158,10 @@ go run ./cmd
 
 ## 联系
 
-欢迎飞书讨论更多功能扩展，
+欢迎讨论更多功能扩展，
 
-![author_wx](./images/author_wx.jpeg)
+ <img src='https://github.com/ConnectAI-E/Feishu-EX-ChatGPT/assets/50035229/3a65502b-bfd5-4096-96d0-90ecc1b5d535' alt='' width='200'/>
+ 
+
+
+
