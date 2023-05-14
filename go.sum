@@ -11,6 +11,8 @@ github.com/agi-cn/llmplugin v0.2.0 h1:1I4jHzHVAZITYv5BYlOYGjj1ku283zpXAgyZfcPvFl
 github.com/agi-cn/llmplugin v0.2.0/go.mod h1:nGX6mCiCnTuhH/ymMZbteHuAf2qLx5+0076BCUv+4iI=
 github.com/agi-cn/llmplugin v0.3.0 h1:U34zheRM7KyU1rmgWOb5HOPQ1nTEKm89ndts04TvrtE=
 github.com/agi-cn/llmplugin v0.3.0/go.mod h1:m08837PBsNYwKcZyT09ns472tHGlM0ukPXTz9HHyJZU=
+github.com/agi-cn/llmplugin v0.4.0 h1:aqqxjAVi3G3te+xfsQjPEEtpypbby4rmrLrJBVSocBc=
+github.com/agi-cn/llmplugin v0.4.0/go.mod h1:m08837PBsNYwKcZyT09ns472tHGlM0ukPXTz9HHyJZU=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
 github.com/bytedance/sonic v1.5.0/go.mod h1:ED5hyg4y6t3/9Ku1R6dU/4KyJ48DZ4jPhfY1O2AihPM=
 github.com/bytedance/sonic v1.8.7 h1:d3sry5vGgVq/OpgozRUNP6xBsSo0mtNdwliApw+SAMQ=
@@ -136,6 +138,8 @@ github.com/sashabaranov/go-openai v1.9.0 h1:NoiO++IISxxJ1pRc0n7uZvMGMake0G+FJ1XP
 github.com/sashabaranov/go-openai v1.9.0/go.mod h1:lj5b/K+zjTSFxVLijLSTDZuP7adOgerWeFyZLUhAKRg=
 github.com/sashabaranov/go-openai v1.9.3 h1:uNak3Rn5pPsKRs9bdT7RqRZEyej/zdZOEI2/8wvrFtM=
 github.com/sashabaranov/go-openai v1.9.3/go.mod h1:lj5b/K+zjTSFxVLijLSTDZuP7adOgerWeFyZLUhAKRg=
+github.com/sashabaranov/go-openai v1.9.4 h1:KanoCEoowAI45jVXlenMCckutSRr39qOmSi9MyPBfZM=
+github.com/sashabaranov/go-openai v1.9.4/go.mod h1:lj5b/K+zjTSFxVLijLSTDZuP7adOgerWeFyZLUhAKRg=
 github.com/sirupsen/logrus v1.9.0 h1:trlNQbNUG3OdDrDil03MCb1H2o9nJ1x4/5LYw7byDE0=
 github.com/sirupsen/logrus v1.9.0/go.mod h1:naHLuLoDiP4jHNo9R0sCBMtWGeIprob74mVsIT4qYEQ=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
