@@ -21,8 +21,11 @@ func NewPluginAction(manager *llmplugin.PluginManager) *PluginAction {
 }
 
 func (a PluginAction) Execute(ctx context.Context, actionInfo *ActionInfo) (next bool, err error) {
+	if !actionInfo.UsePlugin() {
+		return true, nil
+	}
 
-	text := actionInfo.Message.GetText()
+	text := actionInfo.GetText()
 	pluginCtxs, err := a.manager.Select(context.Background(), text)
 	if err != nil {
 		logrus.Errorf("PluginAction Select error: %v", err)
@@ -33,7 +36,11 @@ func (a PluginAction) Execute(ctx context.Context, actionInfo *ActionInfo) (next
 	// NOTE(zy): 需要特别补充一下遗漏的 reply message id
 	result.ReplyMsgID = actionInfo.GetMessageID()
 
-	logrus.Debugf("got plugin result: %+v", result)
+	if result.Type != ActionResultImageB64 {
+		logrus.Debugf("got plugin result: %+v", result)
+	} else {
+		logrus.Debugf("got plugin result in base64 image")
+	}
 	actionInfo.Result = result
 
 	return true, nil

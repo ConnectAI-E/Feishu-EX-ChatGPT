@@ -19,6 +19,10 @@ func NewMessageAction(llmer LLMer) *MessageAction {
 
 func (a MessageAction) Execute(ctx context.Context, actionInfo *ActionInfo) (next bool, err error) {
 	if actionInfo.ExistsResult() {
+		return false, nil
+	}
+
+	if actionInfo.UsePlugin() {
 		return true, nil
 	}
 
@@ -30,6 +34,9 @@ func (a MessageAction) Execute(ctx context.Context, actionInfo *ActionInfo) (nex
 	}
 
 	messages := a.makeLlmMessages(msg)
+
+	logrus.Debugf("ask llm: %v", messages)
+
 	answer, err := a.llmer.Chat(ctx, messages)
 	if err != nil {
 		logrus.Errorf("MessageAction: llmer chat error: %v", err)
@@ -49,11 +56,11 @@ func (a MessageAction) Execute(ctx context.Context, actionInfo *ActionInfo) (nex
 }
 
 func (a MessageAction) makeLlmMessages(content string) []LlmMessage {
+
 	return []LlmMessage{
 		{
 			Role:    "user",
 			Content: content,
 		},
 	}
-
 }
