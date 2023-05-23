@@ -60,9 +60,11 @@ func main() {
 			domain.NewProcessUniqueAction(),
 			domain.NewHelperAction(),
 			domain.NewProcessMentionAction(botname),
+			domain.NewMessageAction(llm),
 
 			domain.NewPluginAction(llmManager),
-			domain.NewMessageAction(llm),
+
+			domain.NewFinalReply("摸鱼中，稍后重试"),
 		),
 	)
 	if err != nil {

@@ -2,6 +2,7 @@ package domain
 
 import (
 	"context"
+	"strings"
 )
 
 type ActionResultType string
@@ -33,10 +34,19 @@ func (a *ActionInfo) GetMessageID() string {
 func (a *ActionInfo) GetText() string {
 	if msg := a.Message; msg != nil {
 
-		return msg.GetText()
+		return strings.TrimLeft(msg.GetText(), "#")
 	}
 
 	return ""
+}
+
+func (a *ActionInfo) UsePlugin() bool {
+	if msg := a.Message; msg != nil {
+		text := msg.GetText()
+		return strings.HasPrefix(text, "#")
+	}
+
+	return false
 }
 
 func (a *ActionInfo) ExistsResult() bool {

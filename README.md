@@ -12,6 +12,13 @@ Feishu-EX-ChatGPT 是让飞书接入一个拥有增强版本的 ChatGPT 功能�
 
 一起贡献更多插件能力，增强 FeishuEx 扩展能力。[github.com/agi-cn/llmplugin](https://github.com/agi-cn/llmplugin)
 
+
+![](./images/plugins.png)
+
+1. 正常提问，使用 ChatGPT 回答。
+2. 以 `#` 开头提问，使用插件进行回答。
+
+
 ## 工作流程 🌊
 
 ![how_it_works](./images/how_it_works.png)
@@ -161,7 +168,7 @@ go run ./cmd
 欢迎讨论更多功能扩展，
 
  <img src='https://github.com/ConnectAI-E/Feishu-EX-ChatGPT/assets/50035229/3a65502b-bfd5-4096-96d0-90ecc1b5d535' alt='' width='200'/>
- 
+
 
 
 
