@@ -170,5 +170,8 @@ go run ./cmd
  <img src='https://github.com/ConnectAI-E/Feishu-EX-ChatGPT/assets/50035229/3a65502b-bfd5-4096-96d0-90ecc1b5d535' alt='' width='200'/>
 
 
+## 赞助感谢
+
+友情感谢 'Find My Ai' 提供的部分经费赞助！
 
 
