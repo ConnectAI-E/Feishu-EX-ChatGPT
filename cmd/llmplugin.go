@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"os"
 
 	"github.com/agi-cn/llmplugin"
@@ -20,7 +19,7 @@ func newLLMPluginManager() *llmplugin.PluginManager {
 
 	chatgpt := openai.NewChatGPT(openAIToken)
 
-	plugins := makePlugins()
+	plugins := makePlugins(chatgpt)
 
 	loggingPlugin(plugins)
 
@@ -30,19 +29,9 @@ func newLLMPluginManager() *llmplugin.PluginManager {
 	)
 }
 
-func makePlugins() []llmplugin.Plugin {
+func makePlugins(chatgpt *openai.ChatGPT) []llmplugin.Plugin {
 
 	plugins := []llmplugin.Plugin{
-		&llmplugin.SimplePlugin{
-			Name:         "Weather",
-			InputExample: ``,
-			Desc:         "Can check the weather forecast",
-			DoFunc: func(ctx context.Context, query string) (answer string, err error) {
-				answer = "Here is dummy weather plugin"
-				return
-			},
-		},
-
 		calculator.NewCalculator(),
 	}
 
@@ -53,8 +42,8 @@ func makePlugins() []llmplugin.Plugin {
 		)
 
 		if googleEngineID != "" && googleToken != "" {
-			plugins = append(plugins,
-				google.NewGoogle(googleEngineID, googleToken))
+			g := google.NewGoogle(googleEngineID, googleToken, google.WithSummarizer(chatgpt))
+			plugins = append(plugins, g)
 		}
 	}
 
