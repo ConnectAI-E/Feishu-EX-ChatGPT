@@ -33,6 +33,10 @@ func (a PluginAction) Execute(ctx context.Context, actionInfo *ActionInfo) (next
 	}
 
 	result := a.makeActionResult(ctx, pluginCtxs)
+	if result == nil {
+		return true, nil
+	}
+
 	// NOTE(zy): 需要特别补充一下遗漏的 reply message id
 	result.ReplyMsgID = actionInfo.GetMessageID()
 

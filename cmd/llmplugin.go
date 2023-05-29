@@ -5,7 +5,6 @@ import (
 
 	"github.com/agi-cn/llmplugin"
 	"github.com/agi-cn/llmplugin/llm/openai"
-	"github.com/agi-cn/llmplugin/plugins/agicn_search"
 	"github.com/agi-cn/llmplugin/plugins/calculator"
 	"github.com/agi-cn/llmplugin/plugins/google"
 	"github.com/agi-cn/llmplugin/plugins/stablediffusion"
@@ -48,7 +47,7 @@ func makePlugins(chatgpt *openai.ChatGPT) []llmplugin.Plugin {
 	}
 
 	{ // Customize Search Engine: agi.cn search
-		plugins = append(plugins, agicn_search.NewAgicnSearch())
+		// plugins = append(plugins, agicn_search.NewAgicnSearch())
 	}
 
 	{ // Stable Diffusion
